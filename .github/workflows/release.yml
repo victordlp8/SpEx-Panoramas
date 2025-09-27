@@ -6,7 +6,7 @@ on:
       - 'e*w*-v*'  # Triggers on tags like e2w1-v0.1.0, e3w4-v1.0.0, etc.
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   build:
