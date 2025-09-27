@@ -128,7 +128,8 @@ jobs:
         with:
           modrinth-id: ${{ steps.set_version.outputs.modrinth_id }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          name: ${{ steps.set_version.outputs.version_without_v }}
+          name: ${{ steps.set_version.outputs.pack_title }}
+          version: ${{ steps.set_version.outputs.version_without_v }}
           files: "*.zip"
           changelog: ${{ steps.changelog.outputs.changelog }}
           loaders: minecraft
