@@ -60,12 +60,14 @@ jobs:
           PACK_NAME=$(echo $GITHUB_REF_NAME | sed 's/-v.*//')
           VERSION_WITHOUT_V=$(echo $GITHUB_REF_NAME | sed 's/.*-v//')
           
-          # Extract modrinth_id from the pack's info.json
+          # Extract modrinth_id and title from the pack's info.json
           MODRINTH_ID=$(grep -o '"modrinth_id": "[^"]*"' $PACK_NAME/info.json | cut -d'"' -f4)
+          PACK_TITLE=$(grep -o '"name": "[^"]*"' $PACK_NAME/info.json | cut -d'"' -f4)
           
           echo "version_without_v=$VERSION_WITHOUT_V" >> $GITHUB_OUTPUT
           echo "pack_name=$PACK_NAME" >> $GITHUB_OUTPUT
           echo "modrinth_id=$MODRINTH_ID" >> $GITHUB_OUTPUT
+          echo "pack_title=$PACK_TITLE" >> $GITHUB_OUTPUT
 
       - name: Generate Changelog
         id: changelog
@@ -116,27 +118,17 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           tag_name: ${{ github.ref_name }}
-          release_name: ${{ steps.set_version.outputs.pack_name }} ${{ steps.set_version.outputs.version_without_v }}
+          release_name: ${{ steps.set_version.outputs.pack_title }}
           body: ${{ steps.changelog.outputs.changelog }}
           draft: false
           prerelease: false
-
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ${{ steps.set_version.outputs.pack_name }}-${{ steps.set_version.outputs.version_without_v }}.zip
-          asset_name: ${{ steps.set_version.outputs.pack_name }}-${{ steps.set_version.outputs.version_without_v }}.zip
-          asset_content_type: application/zip
 
       - name: Publish to Modrinth
         uses: Kir-Antipov/mc-publish@v3.3.0
         with:
           modrinth-id: ${{ steps.set_version.outputs.modrinth_id }}
           modrinth-token: ${{ secrets.MODRINTH_TOKEN }}
-          name: ${{ steps.set_version.outputs.pack_name }} ${{ steps.set_version.outputs.version_without_v }}
+          name: ${{ steps.set_version.outputs.version_without_v }}
           files: "*.zip"
           changelog: ${{ steps.changelog.outputs.changelog }}
           loaders: minecraft
