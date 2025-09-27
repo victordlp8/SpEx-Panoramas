@@ -1,0 +1,18 @@
+[project]
+name = "iconmaker"
+version = "0.1.0"
+description = "Create 16x16 icons from panorama images"
+readme = "README.md"
+requires-python = ">=3.13"
+dependencies = [
+    "numpy>=2.3.3",
+    "pillow>=11.3.0",
+    "requests>=2.32.5",
+    "tqdm>=4.67.1",
+]
+
+[project.scripts]
+icon = "main:main"
+
+[tool.uv]
+package = true
