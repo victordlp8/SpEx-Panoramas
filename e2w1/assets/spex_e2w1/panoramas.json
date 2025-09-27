@@ -6,7 +6,8 @@
       {
         "cubemapId": "spex_e2w1:panoramas/panorama_01/panorama",
         "rotationControl": {
-          "addedPitch": -20.0
+          "addedPitch": -25.0,
+          "addedYaw": -155.0
         }
       }
     ]
@@ -18,7 +19,7 @@
       {
         "cubemapId": "spex_e2w1:panoramas/panorama_02/panorama",
         "rotationControl": {
-          "addedPitch": -20.0
+          "addedPitch": -25.0
         }
       }
     ]
@@ -30,7 +31,9 @@
       {
         "cubemapId": "spex_e2w1:panoramas/panorama_03/panorama",
         "rotationControl": {
-          "addedPitch": -20.0
+          "frozen": true,
+          "addedPitch": -45.0,
+          "addedYaw": -5.0
         }
       }
     ]
@@ -78,7 +81,7 @@
       {
         "cubemapId": "spex_e2w1:panoramas/panorama_07/panorama",
         "rotationControl": {
-          "addedPitch": -20.0
+          "addedPitch": -25.0
         }
       }
     ]
@@ -88,7 +91,10 @@
     "splashText": "spex_e2w1:texts/panorama_08_splashes.txt",
     "cubemaps": [
       {
-        "cubemapId": "spex_e2w1:panoramas/panorama_08/panorama"
+        "cubemapId": "spex_e2w1:panoramas/panorama_08/panorama",
+        "rotationControl": {
+          "addedPitch": -20.0
+        }
       }
     ]
   },    
