@@ -133,7 +133,9 @@ jobs:
           files: "*.zip"
           changelog: ${{ steps.changelog.outputs.changelog }}
           loaders: minecraft
-          game-versions: 1.21.6
+          game-versions: |
+            >=1.21.6 <=1.21.8
+          game-version-filter: releases
           version-type: release
           dependencies: |
             vistas@>=2.11.2(required){modrinth:itzZXRxq}
